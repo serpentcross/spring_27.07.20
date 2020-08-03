@@ -1,30 +1,34 @@
 package ru.geekbrains.sample.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import lombok.RequiredArgsConstructor;
 
-import ru.geekbrains.sample.dto.Student;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import ru.geekbrains.sample.dao.StudentRepository;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController {
 
-   @GetMapping("/")
-   public String getIndexPage() {
-      return "index";
-   }
+    private final StudentRepository studentRepository;
+
+    @GetMapping("/")
+    public String getIndexPage() {
+        return "index";
+    }
 
     @GetMapping("/students")
-    public String getStudentPage() {
-        //чтобы вывести список студентов нужно добавить бин StudentsRepository положить данные в Model
+    public String getStudentPage(Model model) {
+        model.addAttribute("students", studentRepository.findAllStudents());
         return "student";
     }
 
-    @PostMapping("/students")
-    public String sendForm(@ModelAttribute Student student) {
-        System.out.println(student);
-        return "redirect:/";
-    }
+//    @PostMapping("/students")
+//    public String sendForm(@ModelAttribute Student student) {
+//        System.out.println(student);
+//        return "redirect:/";
+//    }
 
 }
