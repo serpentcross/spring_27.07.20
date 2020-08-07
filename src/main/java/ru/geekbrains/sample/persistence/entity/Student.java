@@ -1,7 +1,10 @@
 package ru.geekbrains.sample.persistence.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import java.util.Date;
 import java.util.List;
 
 @Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Student extends AbstractEntity {
 
@@ -35,5 +42,9 @@ public class Student extends AbstractEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "student_subject", joinColumns = @JoinColumn(name = "student"), inverseJoinColumns = @JoinColumn(name = "subject"))
     private List<Subject> subjects;
+
+    @OneToOne
+    @JoinColumn(name = "passport")
+    private Passport passport;
 
 }
