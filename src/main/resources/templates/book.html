@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <title>GeekBrains</title>
+</head>
+<body>
+<h1>Привет от GeekBrains!</h1>
+<hr>
+<span th:text="${book.name}"></span>
+<span th:text="${book.description}"></span>
+<span th:text="${#dates.format(book.created, 'dd-MM-yyyy')}"></span>
+</body>
+</html>

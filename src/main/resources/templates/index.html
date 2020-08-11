@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>GeekBrains</title>
+    </head>
+    <body>
+        <h1>Привет от GeekBrains!</h1>
+        <hr>
+        <table>
+            <thead>
+                <th>id</th>
+                <th>name</th>
+                <th>description</th>
+                <th>created</th>
+            </thead>
+            <tbody>
+                <tr th:each="book, iterator : ${books}">
+                    <span th:if="${book.available}">
+                        <td th:text="${iterator.index + 1}"/>
+                        <td>
+                            <a th:href="@{'/books/' +  ${book.id}}">[[ ${book.name} ]]</a>
+                        </td>
+                        <td th:text="${book.description}"></td>
+                        <td th:text="${#dates.format(book.created, 'dd-MM-yyyy')}"></td>
+                    </span>
+                </tr>
+            </tbody>
+        </table>
+    <select>
+        <option th:text="'Не выбрано'" th:value="null"/>
+        <option th:each="month : ${T(ru.geekbrains.sample.enums.Month).values()}" th:value="${month.ordinal()}" th:text="${month}">
+    </select>
+    </body>
+</html>

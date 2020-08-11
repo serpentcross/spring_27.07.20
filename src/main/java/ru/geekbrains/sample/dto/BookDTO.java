@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BookDTO {
     private String name;
-    private Date created;
     private String description;
+    private Date created;
     private boolean available;
 }
