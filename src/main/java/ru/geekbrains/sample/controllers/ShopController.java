@@ -23,12 +23,6 @@ public class ShopController {
         return "index";
     }
 
-    @GetMapping("/books/{id}")
-    public String getBookPage(@PathVariable String id, Model model) {
-        model.addAttribute("book", bookService.getOne(UUID.fromString(id)));
-        return "book";
-    }
-
     @GetMapping("/schools/{id}")
     public void getSchools(@PathVariable String id) {
         schoolService.getAllSchoolModels(UUID.fromString(id));

@@ -1,4 +1,4 @@
-package ru.geekbrains.sample.dto;
+package ru.geekbrains.sample.dto.v1;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO {
+public class BookDTOV1 {
     private String name;
     private String description;
     private Date created;
