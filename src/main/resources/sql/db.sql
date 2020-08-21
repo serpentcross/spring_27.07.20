@@ -60,7 +60,7 @@ create unique index if not exists library_id_uindex
 create unique index if not exists library_name_uindex
   on library (name);
 
-create table if not exists principal
+create table if not exists director
 (
   id uuid not null
     constraint principal_pk
@@ -72,10 +72,29 @@ create table if not exists principal
   birth_date timestamp not null
 );
 
-alter table principal owner to postgres;
+alter table director owner to postgres;
 
 create unique index if not exists principal_id_uindex
-  on principal (id);
+  on director (id);
 
 create unique index if not exists principal_name_uindex
-  on principal (first_name);
+  on director (first_name);
+
+create table if not exists shopuser
+(
+  id uuid not null
+    constraint user_pk
+      primary key,
+  login varchar(255) not null,
+  password varchar(255) not null,
+  first_name varchar(255) not null,
+  role varchar(255) not null
+);
+
+alter table shopuser owner to postgres;
+
+create unique index if not exists user_id_uindex
+  on shopuser (id);
+
+create unique index if not exists user_login_uindex
+  on shopuser (login);

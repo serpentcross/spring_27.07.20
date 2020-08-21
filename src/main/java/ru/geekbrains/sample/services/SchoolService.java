@@ -3,8 +3,8 @@ package ru.geekbrains.sample.services;
 import org.springframework.stereotype.Service;
 
 import ru.geekbrains.sample.models.SchoolModel;
+import ru.geekbrains.sample.persistence.entities.Director;
 import ru.geekbrains.sample.persistence.entities.Library;
-import ru.geekbrains.sample.persistence.entities.Principal;
 import ru.geekbrains.sample.persistence.entities.School;
 
 import javax.persistence.EntityManager;
@@ -29,8 +29,8 @@ public class SchoolService {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<School> criteriaQuery = criteriaBuilder.createQuery(School.class);
 
-        Root<Principal> root = criteriaQuery.from(Principal.class);
-        Join<Principal, Library> principalLibraryJoin = root.join("library");
+        Root<Director> root = criteriaQuery.from(Director.class);
+        Join<Director, Library> principalLibraryJoin = root.join("library");
         Join<Library, School> librarySchoolJoin = principalLibraryJoin.join("school");
 
         Predicate predicatePrincipalName = criteriaBuilder.equal(root.get("firstName"), principalName);
@@ -48,8 +48,8 @@ public class SchoolService {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<SchoolModel> criteriaQuery = criteriaBuilder.createQuery(SchoolModel.class);
 
-        Root<Principal> root = criteriaQuery.from(Principal.class);
-        Join<Principal, Library> principalLibraryJoin = root.join("library");
+        Root<Director> root = criteriaQuery.from(Director.class);
+        Join<Director, Library> principalLibraryJoin = root.join("library");
         Join<Library, School> librarySchoolJoin = principalLibraryJoin.join("school");
 
         criteriaQuery.multiselect(librarySchoolJoin.get("name"), principalLibraryJoin.get("name"), root.get("firstName"), root.get("birthDate"))

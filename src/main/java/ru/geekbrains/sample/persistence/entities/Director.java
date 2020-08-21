@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 
 @Data
 @Entity
-public class Principal extends AbstractPersistableEntity {
+public class Director extends AbstractPersistableEntity {
 
     private String firstName;
     private String birthDate;

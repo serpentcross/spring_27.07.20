@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
 
@@ -32,5 +32,33 @@
         <option th:text="'Не выбрано'" th:value="null"/>
         <option th:each="month : ${T(ru.geekbrains.sample.enums.Month).values()}" th:value="${month.ordinal()}" th:text="${month}">
     </select>
+    <hr>
+        <div class="container" sec:authorize="isAuthenticated()">
+            <div class="row">
+                <div class="col-sm">
+                    <a class="nav-link" th:href="@{/profile}" th:text="Profile">PROFILE</a>
+                </div>
+                <div class="col-sm">
+                    <form th:action="@{/logout}" method="POST" class="form-inline">
+                        <button id="navLogout" class="btn btn-outline-secondary" type="submit"  th:text="logout"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container" sec:authorize="isAnonymous()">
+        <form th:action="@{/authenticateTheUser}" method="POST" class="form-inline">
+            <div class="row" style="margin-left: auto;margin-right: auto;">
+                <div class="col-sm">
+                    <input type="text" name="username" placeholder="username" class="form-control">
+                </div>
+                <div class="col-sm">
+                    <input type="password" name="password" placeholder="password" class="form-control">
+                </div>
+                <div class="col-sm">
+                    <button type="submit" class="btn btn-success">вход</button>
+                </div>
+            </div>
+        </form>
+    </div>
     </body>
 </html>
